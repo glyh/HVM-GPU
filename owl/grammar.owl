@@ -1,0 +1,26 @@
+#using owl.v4
+book = def*
+
+def =
+   ref '=' term ('&' redex)*
+
+redex = 
+  term '~' term
+
+term = 
+  '*' : era
+  [ '(' term term ')' ] : con
+  [ '{' tag term term '}' ] : dup
+   '#' number : num
+  [ '<' op term term '>' ] : op2 
+  [ '?<' term term '>' ] : swi
+  identifier : var
+  ref : ref
+
+tag = number
+
+ref = 
+  '@' identifier
+
+op =
+  '+'
